@@ -31,7 +31,7 @@ trait RecordsChanges {
     }
 
     private function getShortClassName(){
-        return strtolower((new \ReflectionClass($model))->getShortName());
+        return strtolower((new \ReflectionClass($this))->getShortName());
     }
 
     protected function getEventName($model, $action, $changes = []){
