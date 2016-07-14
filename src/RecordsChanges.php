@@ -61,7 +61,7 @@ trait RecordsChanges {
     public function getHistory($field){
         $res = [];
         $class = $this->getShortClassName();
-        foreach($this->changes->where('event_name', "updated_$class_$field") as $change){
+        foreach($this->changes->where('event_name', "updated_{$class}_{$field}") as $change){
             $res[] = [
                 'timestamp' => $change->created_at->timestamp,
                 'before' => $change->before[$field],
