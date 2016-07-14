@@ -34,7 +34,8 @@ trait RecordsChanges {
     	$name = strtolower((new \ReflectionClass($model))->getShortName());
         $change = '';
         if($action == 'updated'){
-            if($changes->length == 1 || $changes->length == 2)
+            $count = count($changes);
+            if($count == 1 || $count == 2)
                 $change = "_{$changes[0]}";
         }
     	return "{$action}_{$name}{$change}";
