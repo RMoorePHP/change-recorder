@@ -8,11 +8,11 @@
         }
     ],
     "require": {
-
+        "illuminate/support": "^5.2"
     },
-    autoload: {
-    	psr-4: {
-    		RMoore\\ChangeRecorder\\: src/
+    "autoload": {
+    	"psr-4": {
+    		"RMoore\\ChangeRecorder\\": "src/"
     	}
     }
 }

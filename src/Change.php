@@ -1,6 +1,6 @@
 <?php
 
-namespace Sliske\Models;
+namespace RMoore\ChangeRecorder;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
