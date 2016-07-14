@@ -23,16 +23,21 @@ trait RecordsChanges {
         Change::create([
             'subject_id' => $this->id,
             'subject_type' => get_class($this),
-            'event_name' => $this->getEventName($this, $event),
+            'event_name' => $this->getEventName($this, $event, array_keys($changed)),
             'user_id' => $user,
             'before' => json_encode($before),
             'after' => json_encode($changed),
         ]);
     }
 
-    protected function getEventName($model, $action){
+    protected function getEventName($model, $action, $changes = []){
     	$name = strtolower((new \ReflectionClass($model))->getShortName());
-    	return "{$action}_{$name}";
+        $change = '';
+        if($action == 'updated'){
+            if($changes->length == 1 || $changes->length == 2)
+                $change = "_{$changes[0]}";
+        }
+    	return "{$action}_{$name}{$change}";
     }
 
     protected static function getModelEvents(){
