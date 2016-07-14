@@ -12,7 +12,7 @@ class CreateChangesTable extends Migration
      */
     public function up()
     {
-        Schema::connection('mysql_core')->create('changes', function (Blueprint $table) {
+        Schema::create('changes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('subject_id')->unsigned();
@@ -32,6 +32,6 @@ class CreateChangesTable extends Migration
      */
     public function down()
     {
-        Schema::connection('mysql_core')->drop('changes');
+        Schema::drop('changes');
     }
 }
