@@ -25,8 +25,8 @@ trait RecordsChanges {
             'subject_type' => get_class($this),
             'event_name' => $this->getEventName($this, $event, array_keys($changed)),
             'user_id' => $user,
-            'before' => json_encode($before),
-            'after' => json_encode($changed),
+            'before' => $before,
+            'after' => $changed,
         ]);
     }
 

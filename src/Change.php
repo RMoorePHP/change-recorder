@@ -17,6 +17,11 @@ class Change extends \Illuminate\Database\Eloquent\Model
         'after',
     ];
 
+    protected $casts = [
+        'before' => 'array',
+        'after' => 'array',
+    ];
+
     public function user(){
     	return $this->belongsTo(User::class);
     }
