@@ -30,8 +30,12 @@ trait RecordsChanges {
         ]);
     }
 
+    private function getShortClassName(){
+        return strtolower((new \ReflectionClass($model))->getShortName());
+    }
+
     protected function getEventName($model, $action, $changes = []){
-    	$name = strtolower((new \ReflectionClass($model))->getShortName());
+    	$name = $this->getShortClassName();
         $change = '';
         if($action == 'updated'){
             $count = count($changes);
@@ -52,6 +56,19 @@ trait RecordsChanges {
 
     public function changes(){
     	return $this->morphMany(Change::class, 'subject');
+    }
+
+    public function getHistory($field){
+        $res = [];
+        $class = $this->getShortClassName();
+        foreach($this->changes->where('event_name', "updated_$class_$field") as $change){
+            $res[] = [
+                'timestamp' => $change->created_at->timestamp,
+                'before' => $change->before[$field],
+                'after' => $change->after[$field],                
+            ];
+        }
+        return $res;
     }
 
 
