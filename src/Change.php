@@ -8,8 +8,6 @@ class Change extends \Illuminate\Database\Eloquent\Model
 {
     use SoftDeletes;
 
-    protected $connection = 'mysql_core';
-
     protected $fillable = [
     	'subject_id',
         'subject_type',

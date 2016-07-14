@@ -4,7 +4,7 @@ namespace RMoore\ChangeRecorder;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class ChangeRecorderServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
