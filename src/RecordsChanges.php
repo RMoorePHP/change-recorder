@@ -66,7 +66,7 @@ trait RecordsChanges {
         foreach($this->changes->where('event_name', "updated_{$class}_{$field}") as $change){
             $res[] = [
                 'timestamp' => $change->created_at->timestamp,
-                'diff-date' => $change->created_at->diffForHumans();
+                'diff-date' => $change->created_at->diffForHumans(),
                 'before' => $change->before[$field],
                 'after' => $change->after[$field],                
             ];
