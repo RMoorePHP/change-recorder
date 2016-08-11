@@ -58,12 +58,15 @@ trait RecordsChanges {
     	return $this->morphMany(Change::class, 'subject');
     }
 
-    public function getHistory($field){
+    public function getHistory($field = null){
+        if(!$field)
+            return $this->changes;
         $res = [];
         $class = $this->getShortClassName();
         foreach($this->changes->where('event_name', "updated_{$class}_{$field}") as $change){
             $res[] = [
                 'timestamp' => $change->created_at->timestamp,
+                'diff-date' => $change->created_at->diffForHumans();
                 'before' => $change->before[$field],
                 'after' => $change->after[$field],                
             ];
@@ -71,5 +74,14 @@ trait RecordsChanges {
         return $res;
     }
 
+    public function __call($method, $parameters){
+        //check for history
+        $matches = [];
+        if(preg_match('/(.+)(?=History)/', $method, $matches)){
+            $attr = strtolower(preg_replace('/([a-z])([A-Z])/', "$1_$2", $matches[0]));            
+            return $this->getHistory($attr);
+        }
 
+        return parent::__call($method, $parameters);
+    }
 }
