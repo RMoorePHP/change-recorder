@@ -75,6 +75,12 @@ trait RecordsChanges {
     }
 
     public function __call($method, $parameters){
+        $m = $this->_magic($method, $parameters);
+
+        return $m ?: parent::__call($method, $parameters);
+    }
+
+    protected function _magic($method, $parameters){
         //check for history
         $matches = [];
         if(preg_match('/(.+)(?=History)/', $method, $matches)){
@@ -82,6 +88,6 @@ trait RecordsChanges {
             return $this->getHistory($attr);
         }
 
-        return parent::__call($method, $parameters);
+        return null;
     }
 }
