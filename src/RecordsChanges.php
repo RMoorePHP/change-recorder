@@ -77,7 +77,7 @@ trait RecordsChanges {
     public function __call($method, $parameters){
         $m = $this->_changeMagic($method, $parameters);
 
-        return $m ?: parent::__call($method, $parameters);
+        return ($m === null) ?: parent::__call($method, $parameters);
     }
 
     protected function _changeMagic($method, $parameters){
