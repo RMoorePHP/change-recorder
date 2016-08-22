@@ -9,7 +9,7 @@ class Change extends \Illuminate\Database\Eloquent\Model
     use SoftDeletes;
 
     protected $fillable = [
-    	'subject_id',
+        'subject_id',
         'subject_type',
         'event_name',
         'user_id',
@@ -19,14 +19,16 @@ class Change extends \Illuminate\Database\Eloquent\Model
 
     protected $casts = [
         'before' => 'array',
-        'after' => 'array',
+        'after'  => 'array',
     ];
 
-    public function user(){
-    	return $this->belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
-    public function subject(){
-    	return $this->morphTo();
+    public function subject()
+    {
+        return $this->morphTo();
     }
 }
