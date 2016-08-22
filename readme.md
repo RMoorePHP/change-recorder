@@ -1,4 +1,5 @@
 [![StyleCI](https://styleci.io/repos/63356264/shield)](https://styleci.io/repos/63356264)
+[![Build Status](https://travis-ci.org/RMoorePHP/change-recorder.svg)](https://travis-ci.org/RMoorePHP/change-recorder)
 
 Records changes made to eloquent models (such as update/create/delete) and provides methods to check a models history
 
