@@ -15,7 +15,7 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     //  * Creates the application.
     //  *
     //  * @return \Illuminate\Foundation\Application
-     
+
     // public function createApplication()
     // {
     //     $app = require __DIR__.'/../bootstrap/app.php';
@@ -28,13 +28,15 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
     protected $fake;
     protected $times = 1;
 
-    function __construct()
+    public function __construct()
     {
         $this->fake = Faker::create();
     }
 
-    protected function times($count){
+    protected function times($count)
+    {
         $this->times = $count;
+
         return $this;
     }
 }
