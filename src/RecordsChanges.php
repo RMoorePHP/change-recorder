@@ -19,7 +19,7 @@ trait RecordsChanges
         $before = array_intersect_key($this->original, $changed);
 
         $user = \Auth::id();
-        if (!$user) {
+        if (! $user) {
             $user = 0;
         }
 
@@ -70,7 +70,7 @@ trait RecordsChanges
 
     public function getHistory($field = null)
     {
-        if (!$field) {
+        if (! $field) {
             return $this->changes;
         }
         $res = [];
