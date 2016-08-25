@@ -19,7 +19,7 @@ trait RecordsChanges
         $before = array_intersect_key($this->original, $changed);
 
         $user = auth()->id();
-        if (!$user) {
+        if (! $user) {
             $user = 0;
         }
 
