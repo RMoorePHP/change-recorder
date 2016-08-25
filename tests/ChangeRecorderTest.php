@@ -98,4 +98,15 @@ class ChangeRecorderTest extends TestCase
         $history = $post->titleHistory();
         $this->assertCount(1, $history);
     }
+
+    /** @test */
+    public function it_can_get_history_with_get_magic_method()
+    {
+        $post = $this->createPost();
+        $post->title = 'new title';
+        $post->save();
+
+        $history = $post->getTitleHistory();
+        $this->assertCount(1, $history);
+    }
 }
