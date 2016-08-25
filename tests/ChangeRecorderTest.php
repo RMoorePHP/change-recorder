@@ -60,12 +60,42 @@ class ChangeRecorderTest extends TestCase
         $post->title = 'new title';
         $post->content = 'new content';
 
-        // sleep(2);
-
         $post->save();
 
-        // dd($post->changes->last()->toArray());
-
         $this->assertEquals($post->changes->last()->event_name, 'updated_post');
+    }
+
+    /** @test */
+    public function it_can_get_all_history()
+    {
+        $post = $this->createPost();
+        $post->title = 'new title';
+        $post->content = 'new content';
+        $post->save();
+
+        $history = $post->getHistory();
+        $this->assertCount(2, $history);
+    }
+
+    /** @test */
+    public function it_can_get_history_with_parameter()
+    {
+        $post = $this->createPost();
+        $post->title = 'new title';
+        $post->save();
+
+        $history = $post->getHistory('title');
+        $this->assertCount(1, $history);
+    }
+
+    /** @test */
+    public function it_can_get_history_with_magic_method()
+    {
+        $post = $this->createPost();
+        $post->title = 'new title';
+        $post->save();
+
+        $history = $post->titleHistory();
+        $this->assertCount(1, $history);
     }
 }
