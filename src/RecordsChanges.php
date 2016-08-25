@@ -18,7 +18,7 @@ trait RecordsChanges
         $changed = $this->getDirty();
         $before = array_intersect_key($this->original, $changed);
 
-        $user = \Auth::id();
+        $user = auth()->id();
         if (!$user) {
             $user = 0;
         }
