@@ -44,7 +44,7 @@ trait RecordsChanges
         $change = '';
         if ($action == 'updated') {
             $count = count($changes);
-            if ($count == 1 || $count == 2) {
+            if ($count == 1 || ($count == 2 && array_key_exists('updated_at', $changes))) {
                 $change = "_{$changes[0]}";
             }
         }
