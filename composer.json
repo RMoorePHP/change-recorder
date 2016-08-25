@@ -1,6 +1,7 @@
 {
     "name": "rmoore/change-recorder",
     "description": "records changes made to laravel models",
+    "license": "MIT",
     "authors": [
         {
             "name": "Robert Moore",
