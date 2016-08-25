@@ -70,7 +70,7 @@ trait RecordsChanges
 
     public function getHistory($field = null)
     {
-        if (!$field) {
+        if (! $field) {
             return $this->changes;
         }
         $res = [];
