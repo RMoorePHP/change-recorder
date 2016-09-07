@@ -14,9 +14,7 @@ class ChangeRecorderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/../database/migrations/' => database_path('migrations'),
-        ], 'migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         Router::macro('history', function ($name, $class) {
             $this->get($name.'/history', function () use ($class) {
