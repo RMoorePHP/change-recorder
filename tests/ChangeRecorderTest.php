@@ -122,4 +122,56 @@ class ChangeRecorderTest extends TestCase
         $this->assertEquals($collaborators->first(), 1);
         $this->assertEquals($collaborators->last(), 2);
     }
+
+    /** @test */
+    public function it_can_search_history()
+    {
+        $post = $this->createPost();
+
+        $post->content = 'new content';
+        $post->save();
+
+        $history = $post->searchHistory('title');
+
+        $this->assertCount(1, $history);
+    }
+
+    /** @test */
+    public function it_can_search_history_with_magic_method()
+    {
+        $post = $this->createPost();
+
+        $post->content = 'new content';
+        $post->save();
+
+        $history = $post->searchTitleHistory();
+
+        $this->assertCount(1, $history);
+    }
+
+    /** @test */
+    public function it_can_search_history_with_deep_get_history()
+    {
+        $post = $this->createPost();
+
+        $post->content = 'new content';
+        $post->save();
+
+        $history = $post->getHistory('title', true);
+
+        $this->assertCount(1, $history);
+    }
+
+    /** @test */
+    public function it_can_search_history_with_magic_deep_get_history()
+    {
+        $post = $this->createPost();
+
+        $post->content = 'new content';
+        $post->save();
+
+        $history = $post->getTitleHistory(true);
+
+        $this->assertCount(1, $history);
+    }
 }

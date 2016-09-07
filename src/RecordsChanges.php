@@ -80,23 +80,31 @@ trait RecordsChanges
         return $this->hasManyThrough($userClass, Change::class);
     }
 
-    public function getHistory($field = null)
+    public function getHistory($field = null, $deep = false)
     {
         if (! $field) {
             return $this->changes;
         }
-        $res = [];
-        $class = $this->getShortClassName();
-        foreach ($this->changes->where('event_name', "updated_{$class}_{$field}") as $change) {
-            $res[] = [
-                'timestamp' => $change->created_at->timestamp,
-                'diff-date' => $change->created_at->diffForHumans(),
-                'before'    => $change->before[$field],
-                'after'     => $change->after[$field],
-            ];
+
+        if ($deep) {
+            return $this->searchHistory($field);
         }
 
-        return $res;
+        $res = [];
+        $class = $this->getShortClassName();
+
+        return $this->changes->where('event_name', "updated_{$class}_{$field}");
+    }
+
+    public function searchHistory($field = null)
+    {
+        if (! $field) {
+            return $this->changes;
+        }
+
+        return $this->changes->filter(function ($value, $key) use ($field) {
+            return array_key_exists($field, $value->after);
+        });
     }
 
     public function __call($method, $parameters)
@@ -110,10 +118,12 @@ trait RecordsChanges
     {
         //check for history
         $matches = [];
-        if (preg_match('/(?:get)?(.+)(?=History)/', $method, $matches)) {
+        if (preg_match('/(?:(?:get)|(?:search))?(.+)(?=History)/', $method, $matches)) {
             $attr = strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $matches[1]));
 
-            return $this->getHistory($attr);
+            $deep = (count($parameters) >= 1 && $parameters[0]) ?: preg_match('/search/i', $method);
+
+            return $this->getHistory($attr, $deep);
         }
     }
 }
