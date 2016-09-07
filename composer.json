@@ -18,7 +18,8 @@
         "symfony/css-selector": "3.1.*",
         "symfony/dom-crawler": "3.1.*",
         "illuminate/database": "^5.3",
-        "illuminate/events": "^5.3"
+        "illuminate/events": "^5.3",
+        "illuminate/routing": "^5.3"
     },
     "autoload": {
     	"psr-4": {
