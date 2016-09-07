@@ -77,7 +77,9 @@ trait RecordsChanges
     {
         $userClass = config('auth.providers.users.model');
 
-        return $this->hasManyThrough($userClass, Change::class);
+        return $this->belongsToMany($userClass, 'changes')
+            ->withTimestamps()
+            ->withPivot('event_name', 'before', 'after');
     }
 
     public function getHistory($field = null, $deep = false)

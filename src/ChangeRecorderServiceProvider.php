@@ -27,6 +27,11 @@ class ChangeRecorderServiceProvider extends ServiceProvider
 
                 return $class::where($field, $key)->firstOrFail()->getHistory();
             });
+            $this->get("$name/{key}/collaborators", function ($key) use ($class) {
+                $field = (new $class)->getRouteKeyName() ?: 'id';
+
+                return $class::where($field, $key)->firstOrFail()->collaborators;
+            });
         });
     }
 
