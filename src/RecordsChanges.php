@@ -68,6 +68,18 @@ trait RecordsChanges
         return $this->morphMany(Change::class, 'subject');
     }
 
+    public function collaboratorIds()
+    {
+        return $this->changes->pluck('user_id');
+    }
+
+    public function collaborators()
+    {
+        $userClass = config('auth.providers.users.model');
+
+        return $this->hasManyThrough($userClass, Change::class);
+    }
+
     public function getHistory($field = null)
     {
         if (! $field) {

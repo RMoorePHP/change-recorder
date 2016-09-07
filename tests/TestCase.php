@@ -9,15 +9,35 @@ use Illuminate\Container\Container;
 
 class Auth
 {
+    private static $instance;
+
+    public static function instance()
+    {
+        return static::$instance ?: new self;
+    }
+
+    private function __construct()
+    {
+        $this->id = 0;
+        static::$instance = $this;
+    }
+
+    protected $id;
+
     public function id()
     {
-        return 0;
+        return $this->id;
+    }
+
+    public function loginUsingId($id)
+    {
+        $this->id = $id;
     }
 }
 
 function auth()
 {
-    return new Auth;
+    return Auth::instance();
 }
 
 abstract class TestCase extends PHPUnit_Framework_TestCase

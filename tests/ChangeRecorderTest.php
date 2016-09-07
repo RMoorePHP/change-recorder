@@ -109,4 +109,17 @@ class ChangeRecorderTest extends TestCase
         $history = $post->getTitleHistory();
         $this->assertCount(1, $history);
     }
+
+    /** @test */
+    public function it_has_collaborators()
+    {
+        auth()->loginUsingId(1);
+        $post = $this->createPost();
+        auth()->loginUsingId(2);
+        $post->title = 'new title';
+        $post->save();
+        $collaborators = $post->collaboratorIds();
+        $this->assertEquals($collaborators->first(), 1);
+        $this->assertEquals($collaborators->last(), 2);
+    }
 }
