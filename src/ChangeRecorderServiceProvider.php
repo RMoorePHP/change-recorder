@@ -20,12 +20,12 @@ class ChangeRecorderServiceProvider extends ServiceProvider
 
         Router::macro('history', function ($name, $class) {
             $this->get($name.'/history', function () use ($class) {
-                return $class::all();
+                return Change::where('subject_type', $class);
             });
-            $this->get($name.'{key}/history', function ($key) use ($class) {
+            $this->get("$name/{key}/history", function ($key) use ($class) {
                 $field = (new $class)->getRouteKeyName() ?: 'id';
 
-                return $class::where($field, $key);
+                return $class::where($field, $key)->firstOrFail()->getHistory();
             });
         });
     }
