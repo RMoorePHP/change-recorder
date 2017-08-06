@@ -30,5 +30,12 @@
         "classmap": [
             "tests/TestCase.php"
         ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RMoore\\ChangeRecorder\\ChangeRecorderServiceProvider"
+            ]
+        }
     }
 }
