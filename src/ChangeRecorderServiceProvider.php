@@ -2,8 +2,8 @@
 
 namespace RMoore\ChangeRecorder;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\ServiceProvider;
 
 class ChangeRecorderServiceProvider extends ServiceProvider
 {

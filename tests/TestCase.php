@@ -1,11 +1,11 @@
 <?php
 
 use Faker\Factory as Faker;
-use Illuminate\Database\Capsule\Manager as DB;
-use RMoore\ChangeRecorder\Change;
-use RMoore\ChangeRecorder\RecordsChanges;
 use Illuminate\Events\Dispatcher;
+use RMoore\ChangeRecorder\Change;
 use Illuminate\Container\Container;
+use RMoore\ChangeRecorder\RecordsChanges;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class Auth
 {
@@ -118,7 +118,6 @@ abstract class TestCase extends PHPUnit_Framework_TestCase
         ], $args));
     }
 }
-
 
 class Post extends \Illuminate\Database\Eloquent\Model
 {
