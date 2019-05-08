@@ -8,6 +8,6 @@ steps:
       - composer install
 
   - name: test
-    image: php:7
+    image: php:7.0
     commands:
       - vendor/bin/phpunit
