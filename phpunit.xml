@@ -7,12 +7,17 @@
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="true">
+         stopOnFailure="false">
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
+    </filter>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>
@@ -22,4 +27,13 @@
         <env name="DB_DATABASE" value=":memory:"/>   
         <env name="MAIL_DRIVER" value="log"/>   
     </php>
+    <logging>
+        <log type="coverage-html" target="/tmp/report" lowUpperBound="35" highLowerBound="70"/>
+        <log type="coverage-clover" target="build/logs/clover.xml"/>
+        <log type="coverage-php" target="/tmp/coverage.serialized"/>
+        <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+        <log type="junit" target="/tmp/logfile.xml"/>
+        <log type="testdox-html" target="/tmp/testdox.html"/>
+        <log type="testdox-text" target="/tmp/testdox.txt"/>
+    </logging>
 </phpunit>
