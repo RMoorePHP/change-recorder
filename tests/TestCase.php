@@ -1,11 +1,11 @@
 <?php
 
 use Faker\Factory as Faker;
+use Illuminate\Container\Container;
+use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Events\Dispatcher;
 use RMoore\ChangeRecorder\Change;
-use Illuminate\Container\Container;
 use RMoore\ChangeRecorder\RecordsChanges;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class Auth
 {
